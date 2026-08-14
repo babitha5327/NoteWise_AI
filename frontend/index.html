@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteWise AI — Turn notes into knowledge</title>
+<meta name="description" content="Upload handwritten notes, documents, or capture them with your camera. NoteWise AI extracts, understands and transforms them into useful study material.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span class="brand-name">NoteWise <em>AI</em></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#workspace">Workspace</a>
+      <a href="#results">Study material</a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
+    <a class="btn btn-ghost header-cta" href="#workspace">Open workspace</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Turn notes into knowledge</p>
+      <h1>Your notes.<br><span class="ink">Smarter learning.</span></h1>
+      <p class="hero-desc">
+        Upload handwritten notes, documents or capture them with your camera.
+        NoteWise AI extracts, understands and transforms them into useful study material —
+        summaries, key concepts, revision points and quizzes, in the language you learn in.
+      </p>
+      <div class="hero-actions">
+        <a href="#workspace" class="btn btn-primary">Start with a note</a>
+        <a href="#how-it-works" class="btn btn-text">See how it works ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>6</strong><span>Indian &amp; English languages</span></div>
+        <div><strong>OCR + AI</strong><span>Handwriting to structured notes</span></div>
+        <div><strong>Free</strong><span>No sign‑up required</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="paper-card paper-source">
+        <div class="paper-margin"></div>
+        <div class="paper-lines">
+          <span class="scribble s1"></span>
+          <span class="scribble s2"></span>
+          <span class="scribble s3 short"></span>
+          <span class="scribble s4"></span>
+          <span class="scribble s5 short"></span>
+        </div>
+        <span class="paper-tag">Handwritten note</span>
+      </div>
+      <div class="transform-arrow">→</div>
+      <div class="paper-card paper-result">
+        <p class="result-heading">Smart Summary</p>
+        <div class="result-bar w1"></div>
+        <div class="result-bar w2"></div>
+        <div class="chip-row">
+          <span class="mini-chip">TCP</span>
+          <span class="mini-chip">Retransmission</span>
+        </div>
+        <span class="paper-tag result-tag">Structured &amp; ready to revise</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSPACE ============ -->
+<section class="workspace" id="workspace">
+  <div class="section-inner">
+    <p class="eyebrow center">Workspace</p>
+    <h2 class="section-title center">Bring in a note</h2>
+    <p class="section-sub center">Upload a file or capture one live. Supported: JPG, PNG, WEBP, BMP, TIFF, PDF, DOCX.</p>
+
+    <div class="language-row">
+      <label class="lang-field">
+        <span>Input language</span>
+        <select id="inputLanguage"></select>
+      </label>
+      <label class="lang-field">
+        <span>Output language</span>
+        <select id="outputLanguage"></select>
+      </label>
+    </div>
+
+    <div class="intake-grid">
+      <button class="intake-card" id="uploadTrigger" type="button">
+        <span class="intake-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4L7 9M12 4l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="intake-title">Upload notes</span>
+        <span class="intake-desc">Choose a photo, scan, PDF or Word file from your device.</span>
+      </button>
+      <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.bmp,.tiff,.tif,.pdf,.docx" hidden>
+
+      <button class="intake-card" id="cameraTrigger" type="button">
+        <span class="intake-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 012-2h1.5l1-1.5h7l1 1.5H18a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.3" stroke="currentColor" stroke-width="1.8"/></svg>
+        </span>
+        <span class="intake-title">Use camera</span>
+        <span class="intake-desc">Point your camera at a page and capture it directly.</span>
+      </button>
+    </div>
+
+    <p class="format-note">Accepted formats: JPG · JPEG · PNG · WEBP · BMP · TIFF · PDF · DOCX — up to 25MB</p>
+
+    <div id="fileNameBadge" class="file-name-badge" hidden></div>
+
+    <div class="workspace-status" id="statusArea" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="statusText">Processing your note…</p>
+    </div>
+
+    <div class="workspace-error" id="errorArea" hidden>
+      <strong>Something went wrong</strong>
+      <p id="errorText"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMERA MODAL ============ -->
+<div class="camera-modal" id="cameraModal" hidden>
+  <div class="camera-modal-inner">
+    <div class="camera-modal-header">
+      <h3>Capture your notes</h3>
+      <button class="modal-close" id="cameraClose" type="button" aria-label="Close camera">✕</button>
+    </div>
+    <p class="camera-status" id="cameraStatus">Requesting camera permission…</p>
+    <div class="camera-preview-wrap">
+      <video id="cameraVideo" autoplay playsinline muted></video>
+      <canvas id="cameraCanvas" hidden></canvas>
+    </div>
+    <p class="camera-permission-error" id="cameraPermissionError" hidden>
+      Camera permission was blocked or the camera is unavailable.
+      Please allow camera access or use Upload Instead.
+    </p>
+    <div class="camera-actions">
+      <button class="btn btn-primary" id="captureBtn" type="button" disabled>Capture &amp; process</button>
+      <button class="btn btn-ghost" id="uploadInsteadBtn" type="button">Upload instead</button>
+      <button class="btn btn-text" id="cameraCloseBottom" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESULTS ============ -->
+<section class="results" id="results" hidden>
+  <div class="section-inner">
+
+    <div class="result-block" id="ocrBlock">
+      <div class="result-block-head">
+        <h3>Verified OCR</h3>
+        <span class="confidence-pill" id="confidencePill">— % confidence</span>
+      </div>
+      <pre class="result-text" id="ocrText"></pre>
+    </div>
+
+    <div class="result-block">
+      <h3>Note content</h3>
+      <pre class="result-text" id="noteContentText"></pre>
+    </div>
+
+    <div class="result-block">
+      <h3>Smart summary</h3>
+      <p class="result-prose" id="summaryText"></p>
+      <div class="audio-row">
+        <button class="btn btn-small" id="listenBtn" type="button">🔊 Listen</button>
+        <button class="btn btn-small btn-ghost" id="generateSpeechBtn" type="button">Generate speech</button>
+        <audio id="audioPlayer" controls hidden></audio>
+      </div>
+    </div>
+
+    <div class="result-block">
+      <h3>Key concepts</h3>
+      <div class="chip-cloud" id="conceptsArea"></div>
+    </div>
+
+    <div class="result-block">
+      <h3>Revision notes</h3>
+      <div class="revision-list" id="revisionArea"></div>
+    </div>
+
+    <div class="result-block">
+      <h3>Quiz generator</h3>
+      <div class="quiz-list" id="quizArea"></div>
+    </div>
+
+    <div class="result-block">
+      <h3>Translate</h3>
+      <p class="section-sub-left">Translate the note content into your output language.</p>
+      <button class="btn btn-ghost" id="translateBtn" type="button">Translate to <span id="translateTargetLabel">—</span></button>
+      <pre class="result-text" id="translationText" hidden></pre>
+      <p class="translation-note" id="translationNote" hidden></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-inner">
+    <p class="eyebrow center">How NoteWise works</p>
+    <h2 class="section-title center">From page to study set</h2>
+    <ol class="timeline">
+      <li>
+        <span class="timeline-index">01</span>
+        <h4>Capture</h4>
+        <p>Upload a file or use your camera to bring in a handwritten page, printed note, or document.</p>
+      </li>
+      <li>
+        <span class="timeline-index">02</span>
+        <h4>Extract</h4>
+        <p>OCR reads the page — with image cleanup and multiple recognition passes for handwriting.</p>
+      </li>
+      <li>
+        <span class="timeline-index">03</span>
+        <h4>Understand</h4>
+        <p>The extracted text is summarised, and key concepts are pulled out automatically.</p>
+      </li>
+      <li>
+        <span class="timeline-index">04</span>
+        <h4>Study</h4>
+        <p>Revise with generated key points, test yourself with a quiz, translate or listen back.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="section-inner footer-inner">
+    <span class="brand-name small"><span class="brand-mark" aria-hidden="true">N</span>NoteWise <em>AI</em></span>
+    <span class="footer-tag">Turn notes into knowledge</span>
+  </div>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
